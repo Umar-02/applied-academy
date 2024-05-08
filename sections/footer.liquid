@@ -1,0 +1,111 @@
+<footer class="bg-secondary_background">
+  <div class="px-10 mx-auto">
+    <div class=" py-14 text-secondary_text grid md:grid-cols-4 grid-cols-2 gap-10">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'text' %}
+          <div class="max-w-80">
+            <a href="{{ routes.root_url }}" class="h-6 w-26">
+              <img src="{{ block.settings.image | img_url: 'medium' }}" alt="{{ block.settings.image.alt }}" width="" height="" class="mb-7">
+            </a>
+            <p class="font-poppins text-xs text-secondary_text">{{ block.settings.store_text }}</p>
+            <div class="flex items-center gap-x-6 mt-9">
+                <a href="https://facebook.com">{% render 'icon-facebook' %}</a>
+                <a href="https://facebook.com">{% render 'icon-vimeo' %}</a>
+                <a href="https://facebook.com">{% render 'icon-instagram' %}</a>
+                <a href="https://facebook.com">{% render 'icon-twitter' %}</a>
+            </div>
+          </div>
+        {% when 'navigation' %}
+          <div>
+            <h2 class="uppercase text-danger font-bold font-barlow mb-7">{{ block.settings.link_title }}</h2>
+            <ul class="space-y-5">
+              {% for link in block.settings.linklist.links %}
+                <li><a href="{{ link.url }}" class="text-sm font-poppins">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% when 'contact' %}
+            <div>
+              <h2 class="uppercase text-danger font-bold font-barlow mb-7">{{ block.settings.contact_us }}</h2>
+              <ul class="space-y-5 font-poppins text-sm">
+                <li class="flex items-center gap-x-3">
+                  {% render 'icon-location' %}
+                  {{ shop.address | format_address | strip_html }}
+                </li>
+                <li class="flex items-center gap-x-3">
+                  {% render 'icon-phone' %}
+                  <a href="tel:{{ shop.phone }}">{{ shop.phone }}</a>
+                </li>
+                <li class="flex items-center gap-x-3">
+                  {% render 'icon-mail' %}
+                  <a href="mailto:{{ shop.email }}">{{ shop.email }}</a>
+                </li>
+              </ul>
+            </div>
+            {% else %}
+      {% endcase %}
+    {% endfor %}
+    </div>
+
+    <div class="border-t text-secondary_text border-danger py-4 flex items-center justify-between uppercase font-bold">
+      <small>Copyright &copy; {{ 'now' | date: "%Y" }}, {{ 'Miralou' | link_to: routes.root_url }}</small>
+      <small>{{ 'All rights reserved' | link_to: powered_by_link }}</small>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "name": "Title",
+      "type": "text",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Store title"
+        },
+        {
+          "type": "text",
+          "id": "store_text",
+          "label": "About Store",
+          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        }
+      ]
+    },
+    {
+      "name": "Navigation",
+      "type": "navigation",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "linklist",
+          "label": "Navigation menu"
+        },
+        {
+          "type": "text",
+          "id": "link_title",
+          "label": "Navigation title"
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "type": "contact",
+      "settings": [
+        {
+          "type": "text",
+          "id": "contact_us",
+          "label": "Cotact title",
+          "default": "Contact us"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

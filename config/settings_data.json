@@ -1,6 +1,35 @@
 {
   "current": "Default",
   "presets": {
-    "Default": { }
+    "Default": {
+      "color_schemes": {
+        "scheme-1": {
+          "settings": {
+            "background": "#FFFFFF",
+            "background_gradient": "",
+            "text": "#000000",
+            "text-secondary": "#FFFFFF",
+            "button": "#989898",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#F6F6F6",
+            "shadow": "#121212",
+            "danger": "#EF3636",
+            "warning": "#F3C449",
+            "success": "#339900"
+          }
+        },
+        "scheme-2": {
+          "settings": {
+            "background": "#F3F3F3",
+            "background_gradient": "",
+            "text": "#121212",
+            "button": "#121212",
+            "button_label": "#F3F3F3",
+            "secondary_button_label": "#121212",
+            "shadow": "#121212"
+          }
+        }
+      }
+    }
   }
 }

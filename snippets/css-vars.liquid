@@ -1,0 +1,9 @@
+<style>
+  :root {
+    --primary-color: {{ settings.active_color_schema == 'schema1' ? settings.schema1_primary_color : settings.schema2_primary_color }};
+    --secondary-color: {{ settings.active_color_schema == 'schema1' ? settings.schema1_secondary_color : settings.schema2_secondary_color }};
+    /* Add more color variables as needed */
+  }
+
+  /* Other style guide-related variables */
+</style>
