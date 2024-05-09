@@ -1,16 +1,23 @@
 {% assign color_scheme = settings.color_schemes | first %}
 
-<div class="bg-[{{ color_scheme.settings.background }}] pt-[100px] mb-[100px] bg-[url('{{ 'Rectangle_bg_top.png' | file_url }}')] bg-cover bg-no-repeat">
-  <div class="mx-auto px-10">
+<div class="bg-[{{ color_scheme.settings.background }}] relative z-20 pt-[100px] mb-[100px]">
+  <div>
+    {% render 'rectangle-bg' %}
+  </div>
+  <div class="mx-auto px-10 relative z-20">
     <div class="text-[{{ color_scheme.settings.button }}] text-[15px] mb-[30px]">
       <h2 class="text-[34px] font-barlow font-bold leading-10 mb-2 text-[{{ color_scheme.settings.danger }}]">{{ section.settings.title }}</h2>
       {{ section.settings.subtitle }}
     </div>
     <div class="grid grid-cols-3">
-        {% for block in section.settings.blocks %}
-          <a href="{{ routes.collections_url }}" class="relative w-full h-[430px] p-[30px] flex justify-end text-end bg-cover {% if block.settings.image != blank %} bg-[url('{{ block.settings.image | img_url: 'master' }}')] {% else %}  {% endif %}">
-            <div>
-              <h3 class="text-[{{ color_scheme.settings.danger }}] text-4xl">{{ block.title }}</h3>
+        {% for block in section.blocks %}
+          <a href="{{ routes.collections_url }}" class="relative z-20 w-full h-[430px] p-[30px] flex justify-end text-end bg-cover">
+            <div class="absolute z-10 top-0 right-0 bottom-0 left-0 w-full h-full">
+              <img src="{{ block.settings.image | img_url: 'master' }}" alt="" width="100%" height="100%" class="object-cover h-full">
+            </div>
+            <div class="font-barlow font-bold text-end relative z-20">
+              <h3 class="uppercase text-[{{ color_scheme.settings.danger }}] leading-9 text-4xl">{{ block.settings.collection | capitalize }}</h3>
+              <p class="uppercase text-sm leading-4 text-[{{ color_scheme.settings.text-secondary }}]">{{ block.settings.collection.all_products_count }} products</p>
             </div>
           </a>
         {% endfor %}
@@ -41,6 +48,11 @@
         "name": "Collection",
         "type": "collection",
         "settings": [
+          {
+            "type":"collection",
+            "id": "collection",
+            "label": "Collection"
+          },
           {
             "type": "image_picker",
             "id": "image",

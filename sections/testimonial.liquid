@@ -1,0 +1,74 @@
+{% assign color_scheme = settings.color_schemes | first %}
+
+<div class="relative z-20 section-padding pt-[50px]">
+  <div class="mx-auto px-10">
+    <h2 class="text-center font-barlow font-bold text-3xl leading-9 mb-10 text-white uppercase">{{ section.settings.title }}</h2>
+    <div class="swiper h-[260px] max-w-[970px] mx-auto relative">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <div class="h-[205px] py-[30px] px-9 flex justify-center gap-[38px] bg-[{{ color_scheme.settings.secondary_button_label }}]">
+              <div class="text-center px-8 space-y-5">
+                <p class="leading-6 font-poppins">{{ block.settings.body }}</p>
+                <h3 class="font-barlow font-bold text-xl leading-6 text-[{{ color_scheme.settings.danger }}]">{{ block.settings.author }}</h3>
+              </div>
+            </div>
+            </div>
+          {% endfor %}
+      </div>
+      <div class="swiper-button-prev after:hidden absolute z-10 top-1/2 -translate-y-1/2 left-10">
+        {% render 'icon-chevron-left' %}
+      </div>
+      <div class="swiper-button-next after:hidden absolute z-10 top-1/2 -translate-y-1/2 right-10">
+        {% render 'icon-chevron-right' %}
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const swiper = new Swiper('.swiper', {
+    direction: 'horizontal',
+    pagination: {
+      el: '.swiper-pagination'
+    },
+
+    navigation: {
+      prevEl: '.swiper-button-prev',
+      nextEl: '.swiper-button-next'
+    }
+    })
+</script>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "what people say about us"
+    }  
+  ],
+  "blocks": [
+    {
+      "name": "Testimonial",
+      "type": "text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

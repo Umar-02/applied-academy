@@ -1,0 +1,21 @@
+{% assign color_scheme = settings.color_schemes | first %}
+
+<div class="w-full pb-5">
+  <div class="flex flex-col gap-5 justify-between items-center">
+    <div class="w-full h-[200px]">
+      {% if product_product.featured_image %}
+        <div class="h-full overflow-hidden transition duration-100 ease-in-out hovre:scale-105 transform">
+          <img src="{{ product_product.featured_image | img_url: 'master' }}" alt="{{ product_product.featured_image.alt }}" class="w-full h-full object-cover" width="" height="">
+        </div>
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100 ' }}
+      {% endif %}
+    </div>
+    <div class="flex flex-col items-center gap-[10px] text-sm">
+      <span class="font-poppins leading-5 text-[{{ color_scheme.settings.button }}]">{{ product_product.vendor }}</span>
+      <p class="uppercase font-bold font-barlow leading-4 text-[{{ color_scheme.settings.text }}]">{{ product_product.title }}</p>
+      <p class="text-[{{ color_scheme.settings.danger }}] font-bold font-barlow leading-4">{{ product_product.price | money }}</p>
+      <a href="{{ product_product.url }}" class="rounded-[6px] py-[10px] px-[45px] bg-[{{ color_scheme.settings.text }}] text-[{{ color_scheme.settings.text-secondary }}] font-semibold font-poppins capitalize">View product</a>
+    </div>
+  </div>
+</div>

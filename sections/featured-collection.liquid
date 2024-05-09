@@ -1,0 +1,59 @@
+
+<div class="section-padding">
+  <div class="mx-auto px-10">
+    <h2 class="uppercase font-barlow font-bold text-3xl mb-[30px]">{{ section.settings.title }}</h2>
+    <div class="grid grid-cols-{{ section.settings.grid_cols }} gap-[30px] mb-10">
+      {% for product in section.settings.featured_collection.products limit: section.settings.number_of_products_to_show %}
+        {% render 'product-card', product_product: product %}
+      {% else %}
+        {% for item in (1..4) %}
+          {% render 'product-card-placeholde' %}
+        {% endfor %}    
+        Product
+      {% endfor %}
+    </div>
+    <a href="{{ routes.collections_url }}" class="primary-btn block mx-auto w-fit">Show more</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our products"
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Featured Collection"
+    },
+    {
+      "type": "range",
+      "id": "grid_cols",
+      "label": "Products per column",
+      "default": 4,
+      "min": 2,
+      "max": 6,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "number_of_products_to_show",
+      "label": "Number of products to show",
+      "step": 1,
+      "default": 4,
+      "min": 4,
+      "max": 16
+    }
+    ],
+    "presets": [
+      {
+        "name": "Featured Collection"
+      }
+    ]
+}
+{% endschema %}

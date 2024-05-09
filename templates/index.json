@@ -5,7 +5,22 @@
     },
     "categories": {
       "type": "categories"
+    },
+    "featured-collection": {
+      "type": "featured-collection"
+    },
+    "about-us": {
+      "type": "about-us"
+    },
+    "testimonial": {
+      "type": "testimonial"
+    },
+    "sponsored-parnters": {
+      "type": "sponsored-parnters"
+    },
+    "featured-blog": {
+      "type": "featured-blog"
     }
   },
-  "order": ["hero", "categories"]
+  "order": ["hero", "categories", "featured-collection", "about-us", "testimonial", "sponsored-parnters", "featured-blog"]
 }

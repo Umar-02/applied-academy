@@ -1,0 +1,52 @@
+<div class="section-padding">
+  <div class="px-10 mx-auto">
+    <div class="text-[15px] font-poppins leading-4 mb-[30px]">
+      <h2 class="text-3xl font-bold font-barlow uppercase text-black leading-9 mb-[10px]">{{ section.settings.title }}</h2>
+      {{ section.settings.subtitle }}
+    </div>
+    <div class="swiper h-[470px]">
+      <div class="swiper-wrapper">
+        {% for blog in blogs %}
+          <div class="swiper-slide">
+            <div>
+              <div class="h-[300px]">
+                {% if  %}
+                  
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Blog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Latest news"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>Nunc rhoncus auctor risus tempor lacus urna, id laoreet sed. Euismod nisl pellentesque risus cursus fringilla tincidunt volutpat, non.</p>"
+    },
+    {
+      "type": "range",
+      "id": "slides_per_views",
+      "label": "Swiper slides per views",
+      "step": 1,
+      "min": 2,
+      "max": 4,
+      "default": 3
+    }
+  ]
+}
+{% endschema %}

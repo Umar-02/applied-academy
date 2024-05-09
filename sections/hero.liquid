@@ -1,7 +1,14 @@
 {% assign color_scheme = settings.color_schemes | first %}
 
-<div class="relative flex items-center justify-center bg-[url('{{ section.settings.hero_banner | img_url: 'master' }}')] bg-center bg-cover pb-[100px]">
-  <div class="px-10 mx-auto flex justify-center items-center">
+<div class="relative z-20 flex items-center justify-center">
+  <div class="absolute z-10 top-0 right-0 bottom-0 ledt-0 w-full h-full">
+    {% if section.settings.hero_banner != blank %}
+      <img src="{{ section.settings.hero_banner | img_url: 'master' }}" alt="" width="100%" height="100%" class="object-fill h-full">
+    {% else %}
+      <img src="{{ 'Hero_Background.png' | file_url }}" alt="Hero banner" width="100%" height="100%" class="object-fill h-full">
+    {% endif %}
+  </div>
+  <div class="px-10 mx-auto relative z-20 flex justify-center items-center pb-[100px]">
     <div class="max-w-[370px] text-[{{ color_scheme.settings.text-secondary }}] font-poppins">
       <h1 class="text-[50px] font-barlow font-bold leading-[60px] mb-6">{{ section.settings.title | capitalize }}</h1>
       {{ section.settings.subtitle }}

@@ -1,0 +1,41 @@
+<div class="relative z-20 section-padding pb-[100px]">
+  <div class="mx-auto px-10">
+    {% if section.settings.title != blank %}
+      <h2 class="font-barlow font-bold text-3xl">{{ section.settings.title }}</h2>
+    {% endif %}
+    
+    <div class="flex items-center justify-center gap-[30px]">
+      {% for block in section.blocks %}
+        <div class="px-8 flex items-center justify-center">
+          <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt }}" class="object-contain mix-blend-color-burn aspect-[3/2] h-full" width="100%" height="100%">
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Logos",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }  
+  ],
+  "blocks": [
+    {
+      "name": "Logos",
+      "type": "image_picker",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
