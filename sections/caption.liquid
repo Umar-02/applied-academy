@@ -1,0 +1,54 @@
+<div class="section-padding mb-[100px]">
+  <div class="mx-auto h-60 px-10 relative z-20 overflow-hidden">
+    <div class="absolute z-10 top-0 left-0 right-0 bottom-0 w-full h-full flex items-center justify-center bg-black/50">
+      <a href="{{ section.settings.url }}" class="bg-white uppercase font-barlow font-bold leading-4 text-sm text-black flex items-center justify-center gap-[10px] rounded py-3 px-6">
+        {{ section.settings.title }}
+      </a>
+    </div>
+    {% if section.settings.bg_image != blank %}
+      <img src="{{ section.settings.bg_image | img_url: 'master' }}" alt="{{ section.settings.bg_image.alt }}" width="100%" height="100%" class="h-full object-fill">
+    {% else %}
+      <div class="w-full h-full grid grid-cols-7 grid-rows-2">
+        <img src="{{ 'Rectangle_57.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_56.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_55.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_54.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_58.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_59.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_60.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_67.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_66.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_65.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_64.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_63.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_62.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+        <img src="{{ 'Rectangle_61.png' | file_url }}" alt="" width="100%" height="100%" class="object-fill h-full">
+      </div>
+    {% endif %}
+    
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Caption",
+  "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "@Miralou"
+      },
+      {
+        "type": "image_picker",
+        "id": "bg_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "url",
+        "id": "url",
+        "label": "Clicking on title should lead here"
+      }
+    ]
+}
+{% endschema %}

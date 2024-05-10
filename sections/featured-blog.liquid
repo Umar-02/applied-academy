@@ -1,26 +1,48 @@
+{% assign color_scheme = settings.color_schemes | first %}
+
 <div class="section-padding">
-  <div class="px-10 mx-auto">
+  <div class="px-10 mx-auto overflow-hidden">
     <div class="text-[15px] font-poppins leading-4 mb-[30px]">
       <h2 class="text-3xl font-bold font-barlow uppercase text-black leading-9 mb-[10px]">{{ section.settings.title }}</h2>
       {{ section.settings.subtitle }}
     </div>
-    <div class="swiper h-[470px]">
+    <div class="swiper-2 h-[470px]">
       <div class="swiper-wrapper">
-        {% for blog in blogs %}
+        {% for blog in blogs.news.articles %}
           <div class="swiper-slide">
             <div>
               <div class="h-[300px]">
-                {% if  %}
-                  
+                {% if blog.image != blank %}
+                  <img src="{{ blog.image | img_url: 'master' }}" alt="{{ blog.image.alt }}" width="100%" height="" class="h-full object-cover">
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover border' }}
                 {% endif %}
+              </div>
+              <div class="p-[10px] text-center">
+                <p class="font-poppins text-[{{ color_scheme.settings.button }}] text-xs leading-[18px] mb-[15px]">{{ blog.created_at | date: format: 'default' }}</p>
+                <h6 class="text-sm font-barlow font-bold text-[{{ color_scheme.settings.danger }}] leading-4 mb-5">{{ blog.title }}</h6>
+                <a href="{{ blog.url }}" class="text-xs leading-[18px] font-poppins flex items-center justify-center gap-2 mb-6 ">Read more {% render 'arrow-right' %}</a>
               </div>
             </div>
           </div>
         {% endfor %}
       </div>
+      <div class="swiper-pagination mt-10"></div>
     </div>
   </div>
 </div>
+
+<script>
+  const swiper = new Swiper('.swiper-2', {
+    direction: 'horizontal',
+    slidesPerView: 3,
+    pagination: {
+      el: '.swiper-pagination'
+    },
+
+
+    })
+</script>
 
 {% schema %}
 {

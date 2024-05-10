@@ -1,0 +1,55 @@
+{% assign color_scheme = settings.color_schemes | first %}
+<div class="bg-secondary_background py-[60px]">
+  <div class="px-10 mx-auto flex justify-center items-center gap-[70px]">
+    <div class="w-[250px]  text-[{{ color_scheme.settings.text-secondary }}]">
+      <h4 class="uppercase font-barlow font-bold text-3xl leading-9 mb-[10px]">{{ section.settings.title }}</h4>
+      <p class="font-poppins text-xs leading-[18px]">{{ section.settings.subtitle }}</p>
+    </div>
+    <form action="" class="flex items-center justify-center gap-[15px]">
+      <input type="email" placeholder="Enter your e-mail" class="w-[560px] flex-1 px-[10px] py-3 font-poppins text-xs leading-[18px] bg-transparent rounded-[6px] text-white focus:outline-none border border-[{{ color_scheme.settings.danger }}]">
+      <button type="submit" class="text-center {{ section.settings.button_type }} text-white font-semibold font-poppins text-sm leading-5">{{ section.settings.button_label }}</button>
+    </form>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our newsletter"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>Subscribe to get more useful information about us and to get you 15% discount offyour next purchase.</p>"
+    },
+    {
+      "type": "select",
+      "id": "button_type",
+      "label": "Button Type",
+      "options": [
+          {
+            "value": "primary-btn",
+            "label": "Primary Button"
+          },
+          {
+            "value": "secondary-btn",
+            "label": "Secondary Button"
+          }
+      ],
+      "default": "secondary-btn"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Subscribe"
+    }
+  ]
+}
+{% endschema %}

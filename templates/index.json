@@ -20,7 +20,13 @@
     },
     "featured-blog": {
       "type": "featured-blog"
+    },
+    "caption": {
+      "type": "caption"
+    },
+    "newsletter": {
+      "type": "newsletter"
     }
   },
-  "order": ["hero", "categories", "featured-collection", "about-us", "testimonial", "sponsored-parnters", "featured-blog"]
+  "order": ["hero", "categories", "featured-collection", "about-us", "testimonial", "sponsored-parnters", "featured-blog", "caption", "newsletter"]
 }
