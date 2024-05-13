@@ -17,7 +17,7 @@
       <div class="flex items-center gap-1 font-poppins text-xs leading-[18px]">
         {% render 'icon-sort' %}
         <span>Sort by</span>
-        {% render 'icon-down' %}
+        <span class="w-3 h-3">{% render 'icon-down' %}</span>
       </div>
       <div>
         <p class="font-poppins text-xs leading-[18px]">Showing 1 - {{ section.settings.number_of_products_per_page }} of {{ collection.all_products_count }}</p>

@@ -1,0 +1,105 @@
+<div class="mb-[100px]">
+  <div class="relative h-[230px]">
+    <img src="{% if section.settings.bg_image != blank %} {{ section.settings.bg_image | img_url: 'master' }} {% else %} {{ 'Cart_hero.png' | file_url }} {% endif %} %}  " class="h-full absolute z-10 top-0 left-0 right-0 bottom-0" alt="" width="100%" height="100%">
+    <div class="mx-auto px-10 relative z-20 flex items-center h-full">
+      <div class="text-white">
+        <div class="flex items-center gap-1 font-poppins text-xs leading-[18px] mb-[10px]">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span>/</span>
+          <a href="{{ routes.cart_url }}">{{ section.settings.title }}</a>
+        </div>
+        <h1 class="uppercase font-barlow font-bold text-white text-[50px] leading-[60px]">{{ section.settings.title }}</h1>
+      </div>
+    </div>
+  </div>
+  {% if cart.item_count > 0 %}
+    <div class="section-padding">
+      <form action="{{ routes.cart_url }}" method="post" novalidate class="mx-auto px-10">
+        <h4 class="font-barlow font-bold text-3xl leading-9 mb-[30px]">Product</h4>
+        <div class="flex items-start gap-20">
+          {% for item in cart.items %}
+            <div class="cart-item flex flex-1 items-center justify-between w-[680px] mb-[30px]">
+              <div class="flex items-center">
+                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" class="flex items-center justify-start pr-6">{% render 'icon-close' %}</a>
+                <a href="{{ item.url }}" class="w-28 h-24">
+                  {% if item.image %}
+                    <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.title | escape }}" class="h-full object-cover" width="100%" height="100%">
+                  {% else %}
+                    {{ 'product-1' |  placeholder_svg_tag: "w-full h-full object-cover border" }}
+                  {% endif %}
+                </a>
+                <a href="{{ item.url }}" class="my-1 px-10 font-barlow font-bold text-xl leading-6">
+                    {{ item.product.title | truncatewords: 5 }}
+                </a>
+              </div>
+              <div class="py-2 flex items-center gap-10">
+                <input type="number" name="updates[]" value="{{ item.quantity }}" min="1" id="updates_{{ forloop.index }}" class="cart-quantity-input w-[100px] h-[42px] p-4 border border-danger">
+                <div class="cart-item-price flex items-center justify-center py-4 px-2 text-xl leading-6 font-bold font-barlow">
+                  {{ item.price | money }}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+         <div class="flex flex-col w-[380px]">
+          <div class="bg-[#252525] p-[30px] text-white min-h-[270px] mb-5 flex flex-col justify-between">
+            <div>
+              <h5 class="uppercase font-barlow font-bold text-xl leading-6">Cart totals</h5>
+              <hr class="border-1/2 border-[#989898] my-2">
+              <div class="flex items-center justify-between gap-10">
+                <p class="font-poppins text-sm leading-5 text-[#989898]">Subtotals:</p>
+                <span class="cart-subtotal font-barlow font-bold text-sm leading-4">{{ cart.total_price | money }}</span>
+              </div>
+              <hr class="border-1/2 border-[#989898] my-2">
+            </div>
+
+            <div>
+              <hr class="border-1/2 border-[#989898] my-2 mt-auto">
+              <div class="flex items-center justify-between gap-10">
+                <h5 class="font-barlow font-bold text-xl leading-6 uppercase">Total:</h5>
+                <span class="cart-total font-barlow font-bold text-sm leading-4">{{ cart.total_price | money }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-[30px] font-poppins text-sm leading-5 font-semibold">
+            <button type="submit" name="checkout" class="px-3 py-[10px] text-white bg-[#989898] w-full ">Proceed to checkout</button>
+            <a href="{{ routes.all_products_collection_url }}" class="px-3 py-[10px] bg-none border border-danger w-full flex items-center">Continue shopping</a>
+            </div>
+            <button class="w-full block my-5 border py-[10px] bg-[#252525] text-white font-poppins font-medium" type="submit" name="update">Update</button>
+         </div>
+        </div>
+      </form>
+    </div>
+  {% else %}
+    <div class="pb-[100px]">
+      <div class="bg-[#252525] pt-[100px] pb-5 mb-5">
+        <div class="max-w-[630px] text-center mx-auto">
+          <h2 class="text-danger font-barlow font-bold text-[50px] leading-[60px] mb-5">Your Shopping cart is empty</h2>
+          <p class="font-poppins leading-6 text-white">To see which products are in cart, go to shop and click on “Add to cart” button. For now there is no products added into the cart.</p>
+        </div>
+      </div>
+      <a href="{{ routes.all_products_collection_url }}" class="mx-auto block w-fit primary-btn">Go to shop</a>
+    </div>
+  {% endif %}
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Cart"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    }
+    ]
+}
+{% endschema %}

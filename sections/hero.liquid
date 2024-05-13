@@ -9,9 +9,9 @@
     {% endif %}
   </div>
   <div class="px-10 mx-auto relative z-20 flex justify-center items-center pb-[100px]">
-    <div class="max-w-[370px] text-[{{ color_scheme.settings.text-secondary }}] font-poppins">
-      <h1 class="text-[50px] font-barlow font-bold leading-[60px] mb-6">{{ section.settings.title | capitalize }}</h1>
-      {{ section.settings.subtitle }}
+    <div class="max-w-[370px] text-white font-poppins">
+      <h1 class="text-[50px] text-white font-barlow font-bold leading-[60px] mb-6">{{ section.settings.title | capitalize }}</h1>
+      <p class="text-white">{{ section.settings.subtitle }}</p>
       <button class="{{ section.settings.button_type }} mt-10">{{ section.settings.button_label |  link_to: section.settings.button_url  }}</button>
     </div>
     <div>
