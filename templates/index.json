@@ -1,32 +1,168 @@
 {
   "sections": {
     "hero": {
-      "type": "hero"
+      "type": "hero",
+      "settings": {
+        "title": "Choose your shoes with us.",
+        "subtitle": "<p>We will help you to choose the product that without the doubt suits you best. And we mean it<\/p>",
+        "button_type": "primary-btn",
+        "button_label": "Read More",
+        "button_url": "",
+        "hero_banner": "shopify:\/\/shop_images\/Hero_Background.png",
+        "image": "shopify:\/\/shop_images\/hamza-nouasria-ksrsdzqxCPg-unsplash_1.png"
+      }
     },
     "categories": {
-      "type": "categories"
+      "type": "categories",
+      "blocks": {
+        "collection_h6Pmb7": {
+          "type": "collection",
+          "settings": {
+            "collection": "women",
+            "image": "shopify:\/\/shop_images\/Rectangle_39.png"
+          }
+        },
+        "collection_kNRqWQ": {
+          "type": "collection",
+          "settings": {
+            "collection": "men",
+            "image": "shopify:\/\/shop_images\/Rectangle_37.png"
+          }
+        },
+        "collection_YXjnfz": {
+          "type": "collection",
+          "settings": {
+            "collection": "kids",
+            "image": "shopify:\/\/shop_images\/Rectangle_40.png"
+          }
+        }
+      },
+      "block_order": [
+        "collection_h6Pmb7",
+        "collection_kNRqWQ",
+        "collection_YXjnfz"
+      ],
+      "settings": {
+        "title": "Shop by categories",
+        "subtitle": "<p>Pick a category you need<\/p>"
+      }
     },
     "featured-collection": {
-      "type": "featured-collection"
+      "type": "featured-collection",
+      "settings": {
+        "title": "Our products",
+        "featured_collection": "frontpage",
+        "grid_cols": 4,
+        "number_of_products_to_show": 8
+      }
     },
     "about-us": {
-      "type": "about-us"
+      "type": "about-us",
+      "settings": {
+        "title": "About Miralou",
+        "subtitle": "<p>Ut donec suscipit nunc volutpat faucibus. Ut penatibus etiam diam facilisi at nibh nulla auctor lorem. Accumsan vulputate euismod massa sit egestas. Aliquet a scelerisque enim, arcu rutrum adipiscing fringilla risus. Eget fringilla curabitur sed vulputate pretium, habitasse amet. Elementum odio sagittis, interdum elit ipsum. Volutpat erat ac eu aliquam turpis.<\/p>",
+        "image": "shopify:\/\/shop_images\/About_Miralou.png",
+        "image_position": "left"
+      }
     },
     "testimonial": {
-      "type": "testimonial"
+      "type": "testimonial",
+      "blocks": {
+        "text_64NEwX": {
+          "type": "text",
+          "settings": {
+            "body": "<p>“Eu dolor at venenatis aliquam velit et in consequat. Nam dui pulvinar consequat eleifend malesuada. Eu dolor at venenatis aliquam velit et in consequat. Nam dui pulvinar consequat eleifend malesuada. Eu dolor at venenatis aliquam velit et in consequat. Nam dui pulvinar consequat eleifend malesuada.”<\/p>",
+            "author": "-Andrew Charlston"
+          }
+        },
+        "text_4kTWYr": {
+          "type": "text",
+          "settings": {
+            "body": "<p>“Eu dolor at venenatis aliquam velit et in consequat. Nam dui pulvinar consequat eleifend malesuada. Eu dolor at venenatis aliquam velit et in consequat. Nam dui pulvinar consequat eleifend malesuada. Eu dolor at venenatis aliquam velit et in consequat. Nam dui pulvinar consequat eleifend malesuada.”<\/p>",
+            "author": "-Andrew Charlston"
+          }
+        }
+      },
+      "block_order": [
+        "text_64NEwX",
+        "text_4kTWYr"
+      ],
+      "settings": {
+        "title": "what people say about us"
+      }
     },
     "sponsored-parnters": {
-      "type": "sponsored-parnters"
+      "type": "sponsored-parnters",
+      "blocks": {
+        "image_picker_BJLeEn": {
+          "type": "image_picker",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Nike_logo.png"
+          }
+        },
+        "image_picker_tmiHAz": {
+          "type": "image_picker",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Adidas_logo.png"
+          }
+        },
+        "image_picker_BW63Cy": {
+          "type": "image_picker",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/NBA_logo.png"
+          }
+        },
+        "image_picker_YxXpRj": {
+          "type": "image_picker",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Converse_logo.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_picker_BJLeEn",
+        "image_picker_tmiHAz",
+        "image_picker_BW63Cy",
+        "image_picker_YxXpRj"
+      ],
+      "settings": {
+        "title": ""
+      }
     },
     "featured-blog": {
-      "type": "featured-blog"
+      "type": "featured-blog",
+      "settings": {
+        "title": "Latest news",
+        "subtitle": "<p>Nunc rhoncus auctor risus tempor lacus urna, id laoreet sed. Euismod nisl pellentesque risus cursus fringilla tincidunt volutpat, non.<\/p>",
+        "slides_per_views": 3
+      }
     },
     "caption": {
-      "type": "caption"
+      "type": "caption",
+      "settings": {
+        "title": "@Miralou",
+        "url": ""
+      }
     },
     "newsletter": {
-      "type": "newsletter"
+      "type": "newsletter",
+      "settings": {
+        "title": "Our newsletter",
+        "subtitle": "<p>Subscribe to get more useful information about us and to get you 15% discount offyour next purchase.<\/p>",
+        "button_type": "secondary-btn",
+        "button_label": "Subscribe"
+      }
     }
   },
-  "order": ["hero", "categories", "featured-collection", "about-us", "testimonial", "sponsored-parnters", "featured-blog", "caption", "newsletter"]
+  "order": [
+    "hero",
+    "categories",
+    "featured-collection",
+    "about-us",
+    "testimonial",
+    "sponsored-parnters",
+    "featured-blog",
+    "caption",
+    "newsletter"
+  ]
 }

@@ -1,0 +1,18 @@
+{% if pagination.pages > 0 %}
+  <nav role="navigation" class="flex items-center justify-center my-8">
+    
+    <a {% if pagination.previous %} href="{{ pagination.previous.url }}"{% endif %} class="mx-1 font-semibold {% if pagination.previous %}text-danger {% else %}text-[#989898]{% endif %} rounded-full">{% render 'icon-left' %}</a>
+
+    {% for part in pagination.parts %}
+      {% if part.is_link %}
+        <a href="{{ part.url }}" class="rounded-full bg-[#F6F6F6] mx-[7.5px] py-1 px-3 text-sm font-semibold font-poppins leading-5 text-danger">{{ part.title }}</a>
+        {% else %}
+          <span class="rounded-full bg-danger text-[#FFFFFF] mx-[7.5px] py-1 px-3 text-sm font-semibold font-poppins leading-5">{{ part.title }}</span>
+      {% endif %}
+    {% endfor %}
+
+    
+      <a {% if pagination.next %} href="{{ pagination.next.url }}"{% endif %} class="mx-1 font-semibold {% if pagination.next %}text-danger{% else %}text-[#989898]{% endif %} rounded-full">{% render 'icon-right' %}</a>
+    
+  </nav>
+{% endif %}

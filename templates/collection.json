@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "template": {
+      "type": "template-collection",
+      "settings": {
+        "number_of_products_per_page": 12,
+        "grid_gap": 30
+      }
+    }
+  },
+  "order": [
+    "template"
+  ]
+}

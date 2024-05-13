@@ -622,6 +622,26 @@ video {
   margin-right: auto;
 }
 
+.mx-1{
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.my-8{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.mx-\[15px\]{
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.mx-\[7\.5px\]{
+  margin-left: 7.5px;
+  margin-right: 7.5px;
+}
+
 .-ml-5{
   margin-left: -1.25rem;
 }
@@ -746,6 +766,22 @@ video {
   height: 100%;
 }
 
+.h-\[230px\]{
+  height: 230px;
+}
+
+.h-2{
+  height: 0.5rem;
+}
+
+.h-1{
+  height: 0.25rem;
+}
+
+.h-3{
+  height: 0.75rem;
+}
+
 .max-h-\[420px\]{
   max-height: 420px;
 }
@@ -777,6 +813,14 @@ video {
 
 .w-\[560px\]{
   width: 560px;
+}
+
+.w-2{
+  width: 0.5rem;
+}
+
+.w-3{
+  width: 0.75rem;
 }
 
 .max-w-80{
@@ -836,6 +880,10 @@ video {
 
 .grid-cols-7{
   grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.grid-cols-4{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .grid-rows-2{
@@ -910,6 +958,14 @@ video {
   gap: 15px;
 }
 
+.gap-1{
+  gap: 0.25rem;
+}
+
+.gap-7{
+  gap: 1.75rem;
+}
+
 .gap-x-3{
   -moz-column-gap: 0.75rem;
        column-gap: 0.75rem;
@@ -963,6 +1019,14 @@ video {
   border-radius: 0.5rem;
 }
 
+.rounded-sm{
+  border-radius: 0.125rem;
+}
+
+.rounded-full{
+  border-radius: 9999px;
+}
+
 .border{
   border-width: 1px;
 }
@@ -982,6 +1046,14 @@ video {
 
 .bg-secondary_background{
   background-color: rgb(var(--background-secondary) / 1);
+}
+
+.bg-danger{
+  background-color: rgb(var(--danger) / 1);
+}
+
+.bg-\[\]{
+  background-color: ;
 }
 
 .bg-none{
@@ -1017,6 +1089,10 @@ video {
 
 .p-\[30px\]{
   padding: 30px;
+}
+
+.p-10{
+  padding: 2.5rem;
 }
 
 .px-10{
@@ -1107,6 +1183,21 @@ video {
 .py-\[\]{
   padding-top: ;
   padding-bottom: ;
+}
+
+.py-10{
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.px-3{
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.py-1{
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 .pb-5{
@@ -1246,6 +1337,20 @@ video {
 
 .text-secondary_text{
   color: rgb(var(--color-secondary));
+}
+
+.text-\[\]{
+  color: ;
+}
+
+.text-\[\#FFFFFF\]{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-\[\#989898\]{
+  --tw-text-opacity: 1;
+  color: rgb(152 152 152 / var(--tw-text-opacity));
 }
 
 .mix-blend-color-burn{

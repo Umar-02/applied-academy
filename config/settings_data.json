@@ -1,5 +1,86 @@
 {
-  "current": "Default",
+  "current": {
+    "logo": "shopify:\/\/shop_images\/Miralou.png",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "linklist": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "text_AgNp8h": {
+            "type": "text",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Miralou_3928b255-4df2-461e-b885-0939c46fe9dd.png",
+              "store_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            }
+          },
+          "navigation_6f3xin": {
+            "type": "navigation",
+            "settings": {
+              "linklist": "footer",
+              "link_title": "Information"
+            }
+          },
+          "navigation_LnjJmk": {
+            "type": "navigation",
+            "settings": {
+              "linklist": "quick-links",
+              "link_title": "Quick links"
+            }
+          },
+          "contact_6mjJyr": {
+            "type": "contact",
+            "settings": {
+              "contact_us": "Contact us"
+            }
+          }
+        },
+        "block_order": [
+          "text_AgNp8h",
+          "navigation_6f3xin",
+          "navigation_LnjJmk",
+          "contact_6mjJyr"
+        ],
+        "settings": {
+        }
+      }
+    },
+    "content_for_index": [
+
+    ],
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {
+          "background": "#ffffff",
+          "background_gradient": "",
+          "text": "#000000",
+          "text-secondary": "#ffffff",
+          "button": "#989898",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#f6f6f6",
+          "shadow": "#121212",
+          "danger": "#ef3636"
+        }
+      },
+      "scheme-2": {
+        "settings": {
+          "background": "#f3f3f3",
+          "background_gradient": "",
+          "text": "#121212",
+          "text-secondary": "#FFFFFF",
+          "button": "#121212",
+          "button_label": "#f3f3f3",
+          "secondary_button_label": "#121212",
+          "shadow": "#121212",
+          "danger": "#EF3636"
+        }
+      }
+    }
+  },
   "presets": {
     "Default": {
       "color_schemes": {

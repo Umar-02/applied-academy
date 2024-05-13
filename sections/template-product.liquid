@@ -1,0 +1,198 @@
+{% assign selected_variant = product.selected_or_first_available_variant %}
+
+<div class="section-padding">
+  <div class="mx-auto px-10 relative">
+    <div class="flex gap-[30px]">
+      <div class="grid grid-cols-2 gap-[30px] w-1/2">
+        {% for media in product.media %}
+          <div class="w-full h-60 overflow-hidden">
+            {% render 'product-media', media: media %}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="w-1/2">
+        {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
+          <input id="product-id" type="hidden" name="id" value="{{ selected_variant.id }}">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'vendor' %}
+                <div class="flex items-center gap-1 text-xs text-[#989898] capitalize font-poppins mb-4">
+                  <p>{{ product.tags | first }}<span>/</span></p>
+                  <p>{{ product.vendor }}</p>
+                  <span>/</span>
+                  <p>{{ product.title }}</p>
+                  <p></p>
+                </div>
+              {% when 'title' %}
+                <div class="mb-4">
+                  <h5 class="text-xl leading-6 font-barlow font-bold">{{ product.title }}</h5>
+                </div>
+              {% when 'price' %}
+                <div class="mb-4" id="price-{{ section.id }}">
+                  <span class="product-compare text-sm text-gray-500 line-through {%  unless product.selected_variant.compare_at_price > product.selected_variant.price %} hidden {% endunless %}">{{ selected_variant.compare_at_price | money }}</span>
+                  <span class="product-price text-xl leading-6 text-danger font-barlow font-bold">{{ selected_variant.price | money }}</span>
+                </div>
+              {% when 'variant_selector' %}
+                <div class="product-option grid grid-cols-8 gap-4 mb-5">
+                  {% unless product.has_only_default_variant %}
+                    {% for option in product.options_with_values %}
+                        {% for value in option.values %}
+                          <div class="relative overflow-hidden w-full h-[58px]">
+                            <input
+                              class="form-radio peer/draft sr-only z-10 w-full h-full top-0 left-0 bottom-0 right-0" 
+                              {% if option.selected_value == value %}
+                                checked
+                              {% endif %}
+                              value="{{ value }}"
+                              type="radio" 
+                              name="{{ option.name }}" 
+                              id="{{ option.name | handleize }}-{{ value | handleize }}">
+                              <label for="{{ option.name | handleize }}-{{ value | handleize }}" class="w-ful h-full rounded border border-danger peer-checked/draft:border-[#989898] peer-checked/draft:bg-[#eeeeee] peer-checked/draft:text-[#B7B7B7] peer-checked/draft:cursor-auto flex items-center justify-center font-poppins text-sm leading-5 py-2 px-5 cursor-pointer select-none">
+                                {{ value }}
+                              </label>
+                          </div>
+                        {% endfor %}
+                    {% endfor %}
+                  {% endunless %}
+                </div>
+              {% when 'checkout_buttons' %}
+                <div class="flex gap-[30px] mb-[30px] font-semibold font-poppins text-sm leading-5">
+                  <button 
+                  type="submit" 
+                  name="add" 
+                  class="w-full primary-btn bg-[#989898]"
+                  {% if selected_variant.available == false %}
+                    disabled
+                  {% endif %}
+                  >
+                  {% if selected_variant.available == false %}
+                    Sold out
+                  {% else %}
+                    Add to cart
+                  {% endif %}
+                  </button>
+                  <button type="submit" name="add_to_wishlist" class="secondary-btn w-full bg-white text-black border border-danger">Add to wishlist</button>
+                </div>
+              {% when 'description' %}
+                <div class="w-full max-w-4xl mx-auto">
+                  <div class="accordion">
+                    <div class="accordion-item">
+                      <input type="checkbox" id="accordion-item-1" name="accordion-item" class="accordion-item-toggle hidden">
+                      <label for="accordion-item-1" class="accordion-item-label flex justify-between items-center cursor-pointer border border-danger py-[10px] px-[30px] rounded-lg">
+                        <div class="accordion-item-title text-sm leading-5 font-semibold font-poppins">Description</div>
+                        <span class=" w-3 h-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 12 7" fill="none">
+                            <path d="M1 1L6 6L11 1" stroke="#EF3636" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </span>
+                      </label>
+                      <div class="accordion-item-content hidden px-3 pb-1 pt-[30px]">
+                        <p class="font-poppins text-xs leading-[18px]">{{ product.description }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% else %}
+            {% endcase %}
+          {% endfor %}
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let product = {{ product | json }}
+
+  document.querySelectorAll('.product-option input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      // Find selected options
+      let selectedOptions = []
+      
+      document.querySelectorAll('.product-option input[type="radio"]:checked').forEach(radio => {
+        selectedOptions.push(radio.value)
+      })
+
+      // Finding the matched variant
+      let matchedVariant = product.variants.find(variant => {
+        let pass = true
+        for (let i = 0; i < selectedOptions.length; i++) {
+          if (selectedOptions.indexOf(variant.options[i]) === -1) {
+            pass = false
+            break
+          }
+        }
+
+        return pass
+      })
+
+      // Change product form variant id
+      document.querySelector('#product-id').value = matchedVariant
+
+      // Change url
+      let url = new URLParse(window.location.href, true)
+      url.query.variant = matchedVariant.id
+      window.history.replaceState(null, null, url.toString())
+      
+      // Change prices
+      document.querySelector('.product-price').textContent = formatMoney(matchedVariant.price, "{{ shop.money_format }}")
+      document.querySelector('.product-compare').textContent = formatMoney(matchedVariant.compare_at_price, "{{ shop.money_format }}")
+
+    })
+  })
+
+  // Accordion
+  const items = document.querySelectorAll('.accordion-item-toggle');
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        items.forEach(el => {
+          if (el !== item) {
+            el.checked = false;
+          }
+        });
+      });
+    });
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "blocks": [
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "variant_selector",
+      "name": "Variant Selector",
+      "limit": 1
+    },
+    {
+      "type": "quantity",
+      "name": "Quantity",
+      "limit": 1
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "checkout_buttons",
+      "name": "Checkout Buttons",
+      "limit": 1
+    }
+  ]
+}
+{% endschema %}

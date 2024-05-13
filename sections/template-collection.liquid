@@ -1,0 +1,57 @@
+<div>
+  <div class="relative h-[230px]">
+    <img src="{{ 'Rectangle_72.png' | file_url }}" class="h-full absolute z-10 top-0 left-0 right-0 bottom-0" alt="" width="100%" height="100%">
+    <div class="mx-auto px-10 relative z-20 flex items-center h-full">
+      <div class="text-white">
+        <div class="flex items-center gap-1 font-poppins text-xs leading-[18px] mb-[10px]">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span>/</span>
+          <a href="{{ routes.collections_url }}">Shop</a>
+        </div>
+        <h1 class="uppercase font-barlow font-bold text-white text-[50px] leading-[60px]">Shop</h1>
+      </div>
+    </div>
+  </div>
+  <div class="mx-auto p-10 bg-white">
+    <div class="flex items-center gap-7 mb-10">
+      <div class="flex items-center gap-1 font-poppins text-xs leading-[18px]">
+        {% render 'icon-sort' %}
+        <span>Sort by</span>
+        {% render 'icon-down' %}
+      </div>
+      <div>
+        <p class="font-poppins text-xs leading-[18px]">Showing 1 - {{ section.settings.number_of_products_per_page }} of {{ collection.all_products_count }}</p>
+      </div>
+    </div>
+    {% paginate collection.products by section.settings.number_of_products_per_page %}
+      <div class="grid grid-cols-4 gap-[{{ section.settings.grid_gap }}px] py-10">
+        {% for product in collection.products %}
+          {% render 'product-card', product_product: product %}
+        {% endfor %}
+      </div>
+      {% render 'pagination', pagination: paginate %}
+    {% endpaginate %}
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Collection products",
+  "settings": [
+    {
+      "type": "number",
+      "id": "number_of_products_per_page",
+      "default": 12,
+      "label": "Number of products per page"
+    },
+    {
+      "type": "number",
+      "id": "grid_gap",
+      "label": "Grid gap between products (in pixels)",
+      "default": 30
+    }
+    ]
+}
+{% endschema %}

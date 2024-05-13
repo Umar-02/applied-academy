@@ -6,7 +6,7 @@
       <h2 class="text-3xl font-bold font-barlow uppercase text-black leading-9 mb-[10px]">{{ section.settings.title }}</h2>
       {{ section.settings.subtitle }}
     </div>
-    <div class="swiper-2 h-[470px]">
+    <div id="swiper-2" class="h-[470px]">
       <div class="swiper-wrapper">
         {% for blog in blogs.news.articles %}
           <div class="swiper-slide">
@@ -33,7 +33,7 @@
 </div>
 
 <script>
-  const swiper = new Swiper('.swiper-2', {
+  const swiper = new Swiper('#swiper-2', {
     direction: 'horizontal',
     slidesPerView: 3,
     pagination: {

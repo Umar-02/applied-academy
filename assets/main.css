@@ -20,3 +20,7 @@
 .swiper-pagination-bullet-active {
   background-color: #EF3636;
 }
+
+.accordion-item-toggle:checked + .accordion-item-label + .accordion-item-content {
+  display: block;
+}

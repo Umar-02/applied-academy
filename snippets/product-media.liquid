@@ -1,0 +1,27 @@
+{% case media.media_type %}
+  {% when 'image' %}
+    <img src="{{ media | img_url: 'large' }}" alt="{{ media.preview_image.alt }}" height="" width="" class="w-full h-60 object-cover">
+  
+  {% when 'external_video' %}
+    {{ media | external_video_tag: class: "w-full h-60 object-cover" }}
+
+  {% when 'video' %}
+    {{ media | video_tag: controls: true, class: 'w-full h-full object-cover' }}
+
+  {% when 'model' %}
+    <product-model data-mdeia-id="{{ media.id }}">
+      <div>
+        <button id="productModelOpenButton_{{ media.id }}" x-on:click="productModelModal = true" class="w-full h-full bg-gray-100 border relative">
+          <span class="border bg-gray-100 absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+          {% render 'icon-model-viewer' %}</span>
+          <img src="{{ media | img_url: 'large' }}" width="" height="" alt="{{ media.preview_image.alt }}" class="w-full h-full object-cover">
+        </button>
+      </div>
+
+      <template>
+        {{ media | model_viewer_tag: reveal: 'interaction' }}
+      </template>
+    </product-model>
+  {% else %}
+    {{ media | media_tag }}
+{% endcase %}
