@@ -1,7 +1,7 @@
 {% assign main_manu_linklist = linklists[section.settings.linklist].links %}
 {% assign color_scheme = settings.color_schemes | first %}
 
-<div class="relative z-50 bg-[{{ color_scheme.settings.background }}]">
+<div class="relative z-40 bg-[{{ color_scheme.settings.background }}]">
   <div class="mx-auto px-10">
     <div class="w-full flex justify-between items-center py-6 md:space-x-10">
       <div class="flex justify-start truncate">
@@ -43,7 +43,10 @@
         <div class="cursor-pointer">
           {% render 'icon-search' %}
         </div>
-        <a href="{{ routes.cart_url }}" class="whitespace-nowrap">
+        <a href="{{ routes.cart_url }}" class="cart-icon whitespace-nowrap relative">
+          {% if cart.item_count > 0 %}
+            <div class="cart-items-count absolute flex items-center justify-center rounded-full bg-danger text-[10px] text-white h-3 w-3 -right-1 -top-[2px]">{{ cart.item_count }}</div>
+          {% endif %}
           {% render 'icon-cart' %}
         </a>
       </div>

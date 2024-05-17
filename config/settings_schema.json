@@ -96,5 +96,32 @@
         "info": "Upload your logo image."
       }
     ]
+  },
+  {
+    "name": "Cart drawer",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart-drawer",
+        "label": "Cart drawer",
+        "info": "Choose when clicking the cart-icon should lead to cart page or toggle the cart-drawer"
+      },
+      {
+        "type": "select",
+        "id": "cart_icon_behavior",
+        "label": "Cart Icon Behavior",
+        "default": "toggle_drawer",
+        "options": [
+          {
+            "value": "toggle_drawer",
+            "label": "Toggle Cart Drawer"
+          },
+          {
+            "value": "go_to_cart",
+            "label": "Go to Cart Page"
+          }
+        ]
+      }
+    ]
   }
 ]

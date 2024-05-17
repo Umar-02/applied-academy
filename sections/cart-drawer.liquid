@@ -1,0 +1,46 @@
+<div class="cart-drawer fixed right-0 top-0 z-50 h-full bg-black/50 w-full hidden">
+  <div class="cart-drawer-box bg-white w-[485px]  shrink-0 ml-auto">
+    <form action="{{ routes.cart_url }}" method="post" novalidate class="relative h-full w-full flex flex-col justify-between gap-10">
+      <div class="cart-drawer-close absolute top-5 right-4 cursor-pointer">
+        {% render 'icon-close' %}
+      </div>
+      <div class="py-6 px-7">
+        <h3 class="uppercase font-barlow leading-10 font-bold text-3xl mb-2">Your cart</h3>
+        <hr class="border-danger border-4 mb-4">
+        {% if cart.item_count > 0 %}
+          <div class="{%  if cart.item_count > 4 %} overflow-y-scroll h-[400px] {% endif %} %}">
+            {% for item in cart.items %}
+              <div data-line-item-key="{{ item.key }}" class="mb-[15px] flex justify-between items-center gap-6 select-none">
+                <div class="w-[100px] h-[100px] overflow-hidden">
+                  <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.title }}" width="100%" height="100%" class="h-full object-fill">
+                </div>
+                <div class="font-barlow font-bold text-sm leading-4">
+                  <h3 class="text-black">{{ item.product.title }}</h3>
+                  <p class="text-[#626262]">{{ item.product.tags }}</p>
+                  <p class="text-danger">{{ item.price | money }}</p>
+                </div>
+                <div class="cart-drawer-quantity-selector w-[100px] h-[42px] border border-danger flex items-center justify-between">
+                  <button type="button" class="cart-drawer-substract-quantity flex items-center justify-center px-2 h-full">{% render 'icon-left' %}</button>
+                  <input type="text" readonly value="{{ item.quantity }}" class="cart-quantity-input text-center w-5">
+                  <button type="button" class="cart-drawer-add--quantity flex items-center justify-center px-2 h-full">{% render 'icon-right' %}</button>
+                </div>
+                <a href="{{ item.url_to_remove }}" class="h-full flex items-center">
+                  {% render 'icon-close' %}
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="text-center text-[#626262]">Your cart is empty</p>
+        {% endif %}
+      </div>
+      <div class="bg-[#252525] w-full h-full p-7">
+        <div class="flex items-center uppercase justify-between mb-[30px] font-barlow font-bold text-xl leading-6 text-white">
+          <p>Total:</p>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <button type="submit" name="checkout" class="w-full uppercase bg-[#EF3636] text-white text-sm font-poppins leading-5 font-semibold rounded-lg p-[10px] text-center">Checkout</button>
+      </div>
+    </form>
+  </div>
+</div>

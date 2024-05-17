@@ -11,7 +11,7 @@
     </div>
     <div class="grid grid-cols-3">
         {% for block in section.blocks %}
-          <a href="{{ routes.collections_url }}" class="relative z-20 w-full h-[430px] p-[30px] flex justify-end text-end bg-cover">
+          <a href="{{ routes.all_products_collection_url }}" class="relative z-20 w-full h-[430px] p-[30px] flex justify-end text-end bg-cover">
             <div class="absolute z-10 top-0 right-0 bottom-0 left-0 w-full h-full">
               <img src="{{ block.settings.image | img_url: 'master' }}" alt="" width="100%" height="100%" class="object-cover h-full">
             </div>

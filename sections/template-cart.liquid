@@ -6,7 +6,7 @@
         <div class="flex items-center gap-1 font-poppins text-xs leading-[18px] mb-[10px]">
           <a href="{{ routes.root_url }}">Home</a>
           <span>/</span>
-          <a href="{{ routes.cart_url }}">{{ section.settings.title }}</a>
+          <p>{{ section.settings.title }}</p>
         </div>
         <h1 class="uppercase font-barlow font-bold text-white text-[50px] leading-[60px]">{{ section.settings.title }}</h1>
       </div>
@@ -16,30 +16,32 @@
     <div class="section-padding">
       <form action="{{ routes.cart_url }}" method="post" novalidate class="mx-auto px-10">
         <h4 class="font-barlow font-bold text-3xl leading-9 mb-[30px]">Product</h4>
-        <div class="flex items-start gap-20">
-          {% for item in cart.items %}
-            <div class="cart-item flex flex-1 items-center justify-between w-[680px] mb-[30px]">
-              <div class="flex items-center">
-                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" class="flex items-center justify-start pr-6">{% render 'icon-close' %}</a>
-                <a href="{{ item.url }}" class="w-28 h-24">
-                  {% if item.image %}
-                    <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.title | escape }}" class="h-full object-cover" width="100%" height="100%">
-                  {% else %}
-                    {{ 'product-1' |  placeholder_svg_tag: "w-full h-full object-cover border" }}
-                  {% endif %}
-                </a>
-                <a href="{{ item.url }}" class="my-1 px-10 font-barlow font-bold text-xl leading-6">
-                    {{ item.product.title | truncatewords: 5 }}
-                </a>
-              </div>
-              <div class="py-2 flex items-center gap-10">
-                <input type="number" name="updates[]" value="{{ item.quantity }}" min="1" id="updates_{{ forloop.index }}" class="cart-quantity-input w-[100px] h-[42px] p-4 border border-danger">
-                <div class="cart-item-price flex items-center justify-center py-4 px-2 text-xl leading-6 font-bold font-barlow">
-                  {{ item.price | money }}
+        <div class="flex items-start justify-between gap-20">
+          <div>
+            {% for item in cart.items %}
+              <div class="cart-item flex flex-1 items-center justify-between w-[680px] mb-[30px]">
+                <div class="flex items-center">
+                  <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" class="flex items-center justify-start pr-6">{% render 'icon-close' %}</a>
+                  <a href="{{ item.url }}" class="w-28 h-24">
+                    {% if item.image %}
+                      <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.title | escape }}" class="h-full object-cover" width="100%" height="100%">
+                    {% else %}
+                      {{ 'product-1' |  placeholder_svg_tag: "w-full h-full object-cover border" }}
+                    {% endif %}
+                  </a>
+                  <a href="{{ item.url }}" class="my-1 px-10 font-barlow font-bold text-xl leading-6">
+                      {{ item.product.title | truncatewords: 5 }}
+                  </a>
+                </div>
+                <div class="py-2 flex items-center gap-10">
+                  <input type="number" name="updates[]" value="{{ item.quantity }}" min="1" id="updates_{{ forloop.index }}" class="cart-quantity-input w-[100px] h-[42px] p-4 border border-danger">
+                  <div class="cart-item-price flex items-center justify-center py-4 px-2 text-xl leading-6 font-bold font-barlow">
+                    {{ item.price | money }}
+                  </div>
                 </div>
               </div>
-            </div>
-          {% endfor %}
+            {% endfor %}
+          </div>
 
          <div class="flex flex-col w-[380px]">
           <div class="bg-[#252525] p-[30px] text-white min-h-[270px] mb-5 flex flex-col justify-between">
