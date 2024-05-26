@@ -3,7 +3,7 @@
 <div class="relative z-20 section-padding pt-[50px]">
   <div class="mx-auto px-10">
     <h2 class="text-center font-barlow font-bold text-3xl leading-9 mb-10 text-white uppercase">{{ section.settings.title }}</h2>
-    <div class="swiper h-[260px] max-w-[970px] mx-auto relative">
+    <div id="swiper1" class="swiper h-[260px] max-w-[970px] mx-auto relative">
       <div class="swiper-wrapper">
         {% for block in section.blocks %}
           <div class="swiper-slide">
@@ -28,12 +28,18 @@
 </div>
 
 <script>
-    var swiper = new Swiper(".swiper", {
+  document.addEventListener('DOMContentLoaded', function() {
+    var swiper = new Swiper("#swiper1", {
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
+      pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
     });
+  })
   </script>
 
 {% schema %}

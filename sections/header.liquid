@@ -43,7 +43,7 @@
         <div class="cursor-pointer">
           {% render 'icon-search' %}
         </div>
-        <a href="{{ routes.cart_url }}" class="cart-icon whitespace-nowrap relative">
+        <a href="{{ routes.cart_url }}" class="{% if settings.cart_icon_behavior == 'toggle_drawer' %} cart-icon {% endif %} %} whitespace-nowrap relative">
           {% if cart.item_count > 0 %}
             <div class="cart-items-count absolute flex items-center justify-center rounded-full bg-danger text-[10px] text-white h-3 w-3 -right-1 -top-[2px]">{{ cart.item_count }}</div>
           {% endif %}

@@ -1,6 +1,6 @@
-<div class="cart-drawer fixed right-0 top-0 z-50 h-full bg-black/50 w-full hidden">
-  <div class="cart-drawer-box bg-white w-[485px]  shrink-0 ml-auto">
-    <form action="{{ routes.cart_url }}" method="post" novalidate class="relative h-full w-full flex flex-col justify-between gap-10">
+<div class="cart-drawer fixed right-0 top-0 z-50 h-full bg-black/50 w-full hidden overflow-y-scroll">
+  <div class="cart-drawer-box bg-white w-[485px] shrink-0 ml-auto">
+    <form action="{{ routes.cart_url }}" method="post" novalidate class="relative h-full w-full flex flex-col justify-between gap-5">
       <div class="cart-drawer-close absolute top-5 right-4 cursor-pointer">
         {% render 'icon-close' %}
       </div>
@@ -8,25 +8,29 @@
         <h3 class="uppercase font-barlow leading-10 font-bold text-3xl mb-2">Your cart</h3>
         <hr class="border-danger border-4 mb-4">
         {% if cart.item_count > 0 %}
-          <div class="{%  if cart.item_count > 4 %} overflow-y-scroll h-[400px] {% endif %} %}">
+          <div class="cart-drawer-products {%  if cart.item_count > 4 %} overflow-y-scroll {% if settings.upsells_products.size > 0 %} h-[200px] {% else %} h-[200px] {% endif %} {% endif %}">
             {% for item in cart.items %}
-              <div data-line-item-key="{{ item.key }}" class="mb-[15px] flex justify-between items-center gap-6 select-none">
-                <div class="w-[100px] h-[100px] overflow-hidden">
-                  <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.title }}" width="100%" height="100%" class="h-full object-fill">
+              <div data-line-item-key="{{ item.key }}" class="mb-[15px] flex justify-between items-center gap-6 select-none pr-5">
+                <div class="flex items-center gap-6">
+                  <div class="w-[100px] h-[100px] overflow-hidden">
+                    <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.title }}" width="100%" height="100%" class="h-full object-fill">
+                  </div>
+                  <div class="font-barlow font-bold text-sm leading-4">
+                    <h3 class="text-black">{{ item.product.title }}</h3>
+                    <p class="text-[#626262]">{{ item.product.tags }}</p>
+                    <p class="text-danger">{{ item.price | money }}</p>
+                  </div>
                 </div>
-                <div class="font-barlow font-bold text-sm leading-4">
-                  <h3 class="text-black">{{ item.product.title }}</h3>
-                  <p class="text-[#626262]">{{ item.product.tags }}</p>
-                  <p class="text-danger">{{ item.price | money }}</p>
+                <div class="flex items-center gap-6">
+                  <div class="cart-drawer-quantity-selector w-[100px] h-[42px] border border-danger flex items-center justify-between">
+                    <button type="button" class="cart-drawer-substract-quantity flex items-center justify-center px-2 h-full">{% render 'icon-left' %}</button>
+                    <input type="text" readonly value="{{ item.quantity }}" class="cart-quantity-input text-center w-5">
+                    <button type="button" class="cart-drawer-add--quantity flex items-center justify-center px-2 h-full">{% render 'icon-right' %}</button>
+                  </div>
+                  <a href="{{ item.url_to_remove }}" class="h-full flex items-center">
+                    {% render 'icon-close' %}
+                  </a>
                 </div>
-                <div class="cart-drawer-quantity-selector w-[100px] h-[42px] border border-danger flex items-center justify-between">
-                  <button type="button" class="cart-drawer-substract-quantity flex items-center justify-center px-2 h-full">{% render 'icon-left' %}</button>
-                  <input type="text" readonly value="{{ item.quantity }}" class="cart-quantity-input text-center w-5">
-                  <button type="button" class="cart-drawer-add--quantity flex items-center justify-center px-2 h-full">{% render 'icon-right' %}</button>
-                </div>
-                <a href="{{ item.url_to_remove }}" class="h-full flex items-center">
-                  {% render 'icon-close' %}
-                </a>
               </div>
             {% endfor %}
           </div>
@@ -41,6 +45,66 @@
         </div>
         <button type="submit" name="checkout" class="w-full uppercase bg-[#EF3636] text-white text-sm font-poppins leading-5 font-semibold rounded-lg p-[10px] text-center">Checkout</button>
       </div>
-    </form>
+      </form>
+      <div class="upsell-products h-[400px] bg-white pb-5 px-5 text-center">
+        <h5 class="uppercase text-xl leading-6 font-barlow font-bold mb-3">You may also like</h5>
+        <div class="swiper relative" id="swiper3">
+          <div class="swiper-wrapper">
+            {% for product in settings.upsells_products %}
+            <div class="swiper-slide">
+              {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
+                {% assign selected_variant = product.selected_or_first_available_variant %}
+                <input type="hidden" id="product-id" name="id" value="{{ selected_variant.id }}">
+                <div data-product-id="{{ product.id }}">
+                  <div class="h-40 mb-4">
+                    {% if product.featured_image %}
+                      <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.featured_image.alt }}" width="100%" height="" class="h-full object-cover">
+                    {% endif %}
+                  </div>
+                  <div class="flex flex-col items-center gap-[10px] text-sm text-center">
+                    <p class="leading-5 text-[#989898] font-poppins">{{ product.vendor }}</p>
+                    <h6 class="font-barlow font-bold leading-4">{{ product.title }}</h6>
+                    <p class="font-barlow font-bold leading-4 text-danger">{{ product.price | money }}</p>
+    
+                    <button type="submit" class="add-to-cart w-full primary-btn bg-black text-white font-semibold font-poppins"
+                      {% if selected_variant.available == false %}
+                        disabled
+                      {% endif %}
+                      >
+                      {% if selected_variant.available == false %}
+                        Sold out
+                      {% else %}
+                        Add to cart
+                      {% endif %}
+                      </button>
+                  </div>
+                </div>
+              {% endform %}
+            </div>
+          {% endfor %}
+          </div>
+          <div class="swiper-button-prev after:hidden absolute z-10 top-1/2 -translate-y-1/2 left-0">
+            {% render 'icon-chevron-left' %}
+          </div>
+          <div class="swiper-button-next after:hidden absolute z-10 top-1/2 -translate-y-1/2 right-0">
+            {% render 'icon-chevron-right' %}
+          </div>
+        </div>
+      </div>
   </div>
 </div>
+
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+    var swiper3 = new Swiper('#swiper3', {
+      direction: 'horizontal',
+      slidesPerView: 2,
+      spaceBetween: 20,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      // Add other Swiper parameters as needed
+    });
+  });
+</script>

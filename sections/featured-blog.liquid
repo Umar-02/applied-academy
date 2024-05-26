@@ -1,4 +1,4 @@
-{% comment %} {% assign color_scheme = settings.color_schemes | first %}
+{% assign color_scheme = settings.color_schemes | first %}
 
 <div class="section-padding">
   <div class="px-10 mx-auto overflow-hidden">
@@ -33,13 +33,15 @@
 </div>
 
 <script>
-  const swiper2 = new Swiper('#swiper-2', {
-    direction: 'horizontal',
-    slidesPerView: 3,
-    pagination: {
-      el: '.swiper-pagination'
-    }
+  document.addEventListener('DOMContentLoaded', function() {
+    var swiper2 = new Swiper('#swiper-2', {
+      direction: 'horizontal',
+      slidesPerView: 3,
+      pagination: {
+        el: '.swiper-pagination'
+      }
     })
+  })
 </script>
 
 {% schema %}
@@ -69,4 +71,4 @@
     }
   ]
 }
-{% endschema %} {% endcomment %}
+{% endschema %} 
